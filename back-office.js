@@ -2,35 +2,60 @@
 // 0) verifica che se clicca sul bottone "salva" siano valorizzati tutti gli input
 // 1) se non sono tutti valorizzati non andare avanti e dai un messaggio di errore all'utente
 // 2) se sono tutti valorizzati vai avanti
+// 3) aggiungiamo il bottone "reset" che se cliccato pulisce i campi input del form
 
 const API_KEY =
   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWUxOTNjNjRjNTllYzAwMTk5MGQ2ZTMiLCJpYXQiOjE3MDkyODIyNDYsImV4cCI6MTcxMDQ5MTg0Nn0.J7mwekq6mY_xr10JEIvH-TC3eFBvSv96e3pNecBvqp8";
 const url = "https://striveschool-api.herokuapp.com/api/product/";
 
+function valorizza() {
+  // per ottenere la stringa di query dall'URL
+  const queryString = window.location.search;
+
+  const queryParams = new URLSearchParams(queryString);
+
+  // Ottieni i valori dei parametri dalla stringa di query
+  const imageUrl = queryParams.get("imageUrl");
+  const name = queryParams.get("name");
+  const description = queryParams.get("description");
+  const brand = queryParams.get("brand");
+  const price = queryParams.get("price");
+  console.log(price);
+  console.log(name);
+
+  // Valorizza gli input con i valori dei parametri ottenuti
+  document.getElementById("campo1").value = name;
+  document.getElementById("campo2").value = description;
+  document.getElementById("campo3").value = brand;
+  document.getElementById("campo4").value = imageUrl;
+  document.getElementById("campo5").value = price;
+}
+
 document.addEventListener("DOMContentLoaded", function () {
-  const form = document.querySelector("form");
+  valorizza();
+  const form = document.getElementById("myForm");
 
   form.addEventListener("submit", function (event) {
     event.preventDefault(); // Evita il comportamento predefinito del submit del form
     postData();
   });
-
-  function inviaDatiAlServer() {
-    const nome = document.getElementById("campo1").value;
-    const descrizione = document.getElementById("campo2").value;
-    const brand = document.getElementById("campo3").value;
-    const imgUrl = document.getElementById("campo4").value;
-    const prezzo = document.getElementById("campo5").value;
-
-    const data = {
-      name: nome,
-      description: descrizione,
-      brand: brand,
-      imageUrl: imgUrl,
-      price: prezzo,
-    };
-  }
 });
+
+function inviaDatiAlServer() {
+  const nome = document.getElementById("campo1").value;
+  const descrizione = document.getElementById("campo2").value;
+  const brand = document.getElementById("campo3").value;
+  const imgUrl = document.getElementById("campo4").value;
+  const prezzo = document.getElementById("campo5").value;
+
+  const data = {
+    name: nome,
+    description: descrizione,
+    brand: brand,
+    imageUrl: imgUrl,
+    price: prezzo,
+  };
+}
 
 function postData() {
   const name = document.getElementById("campo1").value;
@@ -47,6 +72,7 @@ function postData() {
     price: prezzo,
   };
 
+  // ☑️FETCH (specificare metodo Post)
   fetch(url, {
     // con il metodo dichiariamo l'intento di creare un NUOVO elemento nella collezione "/api/agenda" tramite metodo "POST"
     // method: "POST",
@@ -86,22 +112,21 @@ function postData() {
 
       // in base a come siamo arrivati qui, per creazione o modifica, creeremo il messaggio più appropriato alla fine della richiesta
       if (newAppointment) {
-        alert("Appuntamento con id: " + " è stato modificato con successo ");
+        alert(" è stato modificato con successo ");
       } else {
-        alert("Appuntamento con id: " + " è stato creato correttamente");
+        alert(" è stato creato correttamente");
 
         // pulizia dei campi solo in modalità CREAZIONE (POST)
 
         // approccio che utilizza la referenza al form per resettarlo col suo metodo specifico
         e.target.reset();
-
-        // approccio imperativo che prende tutti i campi e gli forza il valore a ""
-
-        // document.getElementById("name").value = ""
-        // document.getElementById("description").value = ""
-        // document.getElementById("price").value = ""
-        // document.getElementById("time").value = ""
       }
     })
     .catch((err) => console.log(err));
 }
+
+// ☑️Per gestire il click sul pulsante reset
+let bottoneReset = document.getElementById("resetButton");
+bottoneReset.addEventListener("click", function () {
+  let form = document.getElementById("myForm").reset();
+});

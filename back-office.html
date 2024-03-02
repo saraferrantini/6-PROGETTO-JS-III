@@ -14,26 +14,11 @@
   </head>
   <body>
     <header>
-      <div class="collapse bg-dark" id="navbarToggleExternalContent">
-        <div class="container">
-          <div class="row flex-column">
-            <div class="col-sm-8 col-md-7 py-4 text-white">
-              <h4>About</h4>
-              <p class="text-gray">
-                Add some information about the album below, the author, or any other background context. Make it a few
-                sentences long so folks can pick up some informative tidbits. Then, link them off to some social
-                networking sites or contact information.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- ☑️ HEADER -->
       <!-- navbar -->
-      <nav class="navbar navbar-expand-lg bg-black">
-        <div class="container">
-          <a class="navbar-brand" href="#">
-            <img src="./logo1.jpg" alt="Bootstrap" width="200" height="auto" />
-          </a>
+      <nav class="navbar navbar-expand-lg bg-dark fixed-top">
+        <div class="container-fluid">
+          <a class="navbar-brand text-white fs-4" href="#">Shopware</a>
           <button
             class="navbar-toggler"
             type="button"
@@ -48,7 +33,7 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
+                <a class="nav-link text-white" aria-current="page" href="#">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link text-white" href="#">Galleria</a>
@@ -71,51 +56,65 @@
                 </ul>
               </li>
             </ul>
-            <form class="d-flex" role="search">
+            <form class="d-flex">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-              <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
           </div>
         </div>
       </nav>
     </header>
+    <!-- ☑️MAIN -->
     <main>
       <br />
       <!-- form -->
       <div class="container">
-        <h2>Form Inserisci Prodotti</h2>
-        <form>
-          <!-- Campo di input 1 -->
-          <div class="form-group">
-            <label for="campo1">Nome</label>
-            <input type="text" class="form-control" id="campo1" placeholder="Inserisci il nome" required />
+        <div class="row">
+          <!-- Colonna sinistra per il form -->
+          <div class="col-md-6">
+            <h2>Form Inserisci Prodotti</h2>
+            <form id="myForm">
+              <!-- Campo di input 1 -->
+              <div class="form-group">
+                <label for="campo1">Nome</label>
+                <input type="text" class="form-control" id="campo1" placeholder="Inserisci il nome" required />
+              </div>
+              <!-- Campo di input 2 -->
+              <div class="form-group">
+                <label for="campo2">Descrizione</label>
+                <input type="text" class="form-control" id="campo2" placeholder="Inserisci la descrizione" required />
+              </div>
+              <!-- Campo di input 3 -->
+              <div class="form-group">
+                <label for="campo3">Brand</label>
+                <input type="text" class="form-control" id="campo3" placeholder="Inserisci il brand" required />
+              </div>
+              <!-- Campo di input 4 -->
+              <div class="form-group">
+                <label for="campo4">Img url</label>
+                <input type="text" class="form-control" id="campo4" placeholder="Inserisci l'img url" required />
+              </div>
+              <!-- Campo di input 5 -->
+              <div class="form-group">
+                <label for="campo5">Prezzo</label>
+                <input type="text" class="form-control" id="campo5" placeholder="Inserisci il prezzo" required />
+              </div>
+              <br />
+              <!-- Bottone salva -->
+              <button type="submit" class="btn bg-success text-white mr-2">Salva</button>
+              <!-- Bottone reset -->
+              <button type="button" class="btn bg-danger text-white" id="resetButton">Reset</button>
+            </form>
           </div>
-          <!-- Campo di input 2 -->
-          <div class="form-group">
-            <label for="campo2">Descrizione</label>
-            <input type="text" class="form-control" id="campo2" placeholder="Inserisci la descrizione" required />
+          <!-- Colonna destra per la card con l'immagine -->
+          <div class="col-md-6">
+            <div class="card mt-5">
+              <img src="./assets/foto-back_office.webp" class="card-img-top" alt="foto prodotti" />
+            </div>
           </div>
-          <!-- Campo di input 3 -->
-          <div class="form-group">
-            <label for="campo3">Brand</label>
-            <input type="text" class="form-control" id="campo3" placeholder="Inserisci il brand" required />
-          </div>
-          <!-- Campo di input 4 -->
-          <div class="form-group">
-            <label for="campo4">Img url</label>
-            <input type="text" class="form-control" id="campo4" placeholder="Inserisci l'img url" required />
-          </div>
-          <!-- Campo di input 5 -->
-          <div class="form-group">
-            <label for="campo5">Prezzo</label>
-            <input type="text" class="form-control" id="campo5" placeholder="Inserisci il prezzo" required />
-          </div>
-          <br />
-          <!-- Bottone salva -->
-          <button type="submit" class="btn bg-success text-white">Salva</button>
-        </form>
+        </div>
       </div>
     </main>
+
     <script src="./back-office.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
